@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 
 const App = () => {
-  const [formInf, setFormInf] = useState({});
+  const [formInf, setFormInf] = useState({ linkInput: "" });
   const [isEditMode, setEditMode] = useState(false);
 
   const onInputChange = e => {
@@ -18,6 +18,7 @@ const App = () => {
     if (!linkList.indexOf(formInf.linkInput)) {
       alert("image already exists");
       setFormInf({ linkInput: "" });
+    } else if (formInf.linkInput.trim() === "") {
     } else {
       dispatch(addLink(formInf.linkInput));
       setFormInf({ linkInput: "" });
@@ -29,6 +30,7 @@ const App = () => {
       if (!linkList.indexOf(formInf.linkInput)) {
         alert("image already exists");
         setFormInf({ linkInput: "" });
+      } else if (formInf.linkInput.trim() === "") {
       } else {
         dispatch(addLink(formInf.linkInput));
         setFormInf({ linkInput: "" });
@@ -49,7 +51,7 @@ const App = () => {
       return (
         <div className="flex-container">
           {linkList.map((link, index) => (
-            <>
+            <React.Fragment key={index}>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 <img
                   src={link}
@@ -57,8 +59,10 @@ const App = () => {
                   className="list center margin"
                 ></img>
               </a>
-              <button onClick={() => onDelete(index)}>Delete</button>
-            </>
+              <button className="btn" onClick={() => onDelete(index)}>
+                Delete
+              </button>
+            </React.Fragment>
           ))}
         </div>
       );
@@ -66,7 +70,7 @@ const App = () => {
       return (
         <div className="flex-container">
           {linkList.map((link, index) => (
-            <>
+            <React.Fragment key={index}>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 <img
                   src={link}
@@ -74,10 +78,18 @@ const App = () => {
                   className="list center margin"
                 ></img>
               </a>
-            </>
+            </React.Fragment>
           ))}
         </div>
       );
+    }
+  };
+
+  const renderEditButton = () => {
+    if (isEditMode) {
+      return "Back to View Mode";
+    } else {
+      return "Switch to Edit Mode";
     }
   };
 
@@ -100,7 +112,7 @@ const App = () => {
             Add to MyScrapBook
           </button>
           <button className="margin" onClick={handleToggleButton}>
-            Switch to Edit Mode
+            {renderEditButton()}
           </button>
         </div>
         {renderImages()}

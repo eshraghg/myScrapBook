@@ -25,3 +25,7 @@
 .margin {
   margin: 0.5rem;
 }
+
+.btn:hover {
+  background-color: white;
+}
