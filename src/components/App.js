@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { addLink } from "./actions";
+import { addLink, deleteLink } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 
 const App = () => {
   const [formInf, setFormInf] = useState({});
+  const [isEditMode, setEditMode] = useState(false);
 
   const onInputChange = e => {
     setFormInf({ ...formInf, [e.target.name]: e.target.value });
@@ -14,14 +15,69 @@ const App = () => {
   const dispatch = useDispatch();
 
   const onButtonClick = formInf => {
-    dispatch(addLink(formInf.linkInput));
-    setFormInf({ linkInput: "" });
+    if (!linkList.indexOf(formInf.linkInput)) {
+      alert("image already exists");
+      setFormInf({ linkInput: "" });
+    } else {
+      dispatch(addLink(formInf.linkInput));
+      setFormInf({ linkInput: "" });
+    }
   };
 
   const onKeyPress = event => {
     if (event.key === "Enter") {
-      dispatch(addLink(formInf.linkInput));
-      setFormInf({ linkInput: "" });
+      if (!linkList.indexOf(formInf.linkInput)) {
+        alert("image already exists");
+        setFormInf({ linkInput: "" });
+      } else {
+        dispatch(addLink(formInf.linkInput));
+        setFormInf({ linkInput: "" });
+      }
+    }
+  };
+
+  const onDelete = index => {
+    dispatch(deleteLink(index));
+  };
+
+  const handleToggleButton = () => {
+    setEditMode(!isEditMode);
+  };
+
+  const renderImages = () => {
+    if (isEditMode) {
+      return (
+        <div className="flex-container">
+          {linkList.map((link, index) => (
+            <>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={link}
+                  alt="listOfPics"
+                  className="list center margin"
+                ></img>
+              </a>
+              <button onClick={() => onDelete(index)}>Delete</button>
+            </>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex-container">
+          {linkList.map((link, index) => (
+            <>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={link}
+                  alt="listOfPics"
+                  className="list center margin"
+                ></img>
+              </a>
+            </>
+          ))}
+        </div>
+      );
     }
   };
 
@@ -35,7 +91,7 @@ const App = () => {
             onChange={onInputChange}
             onKeyPress={onKeyPress}
             placeholder="Paste Image Link Here!"
-            size="100"
+            // size='100';
           />
           <button
             className="ui button primary"
@@ -43,20 +99,11 @@ const App = () => {
           >
             Add to MyScrapBook
           </button>
+          <button className="margin" onClick={handleToggleButton}>
+            Switch to Edit Mode
+          </button>
         </div>
-        <div className="flex-container">
-          <ul>
-            {linkList.map(link => (
-              <a href={link} target="_blank">
-                <img
-                  src={link}
-                  alt="listOfPics"
-                  className="list center margin"
-                ></img>
-              </a>
-            ))}
-          </ul>
-        </div>
+        {renderImages()}
       </div>
     </div>
   );
