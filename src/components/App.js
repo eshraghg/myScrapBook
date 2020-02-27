@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { addLink, deleteLink } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import Button from "@material-ui/core/Button";
+import { TextField, Container } from "@material-ui/core";
 
 const App = () => {
   const [formInf, setFormInf] = useState({ linkInput: "" });
@@ -52,16 +54,18 @@ const App = () => {
         <div className="flex-container">
           {linkList.map((link, index) => (
             <React.Fragment key={index}>
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={link}
-                  alt="listOfPics"
-                  className="list center margin"
-                ></img>
-              </a>
-              <button className="btn" onClick={() => onDelete(index)}>
-                Delete
-              </button>
+              <div className="flex-container block center">
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={link}
+                    alt="listOfPics"
+                    className="list center margin"
+                  ></img>
+                </a>
+                <button className="btn" onClick={() => onDelete(index)}>
+                  Delete
+                </button>
+              </div>
             </React.Fragment>
           ))}
         </div>
@@ -95,28 +99,42 @@ const App = () => {
 
   return (
     <div>
-      <div className="center marginTop">
-        <div className="ui input displayInline">
-          <input
-            name="linkInput"
-            value={formInf.linkInput || ""}
-            onChange={onInputChange}
-            onKeyPress={onKeyPress}
-            placeholder="Paste Image Link Here!"
-            // size='100';
-          />
-          <button
-            className="ui button primary"
-            onClick={() => onButtonClick(formInf)}
-          >
-            Add to MyScrapBook
-          </button>
-          <button className="margin" onClick={handleToggleButton}>
-            {renderEditButton()}
-          </button>
-        </div>
-        {renderImages()}
-      </div>
+      {/* <div className="center marginTop"> */}
+      {/* <div className="ui input displayInline"> */}
+      <Container fluid="true" textAlign="center" className="center marginTop">
+        <TextField
+          name="linkInput"
+          value={formInf.linkInput || ""}
+          onChange={onInputChange}
+          onKeyPress={onKeyPress}
+          placeholder="Paste Image Link Here!"
+          id="outlined-basic"
+          label="Insert Image Link Here"
+          variant="outlined"
+          size="small"
+          fluid="true"
+        />
+        <Button
+          // className="ui button primary"
+          color="primary"
+          variant="contained"
+          onClick={() => onButtonClick(formInf)}
+        >
+          Add to MyScrapBook
+        </Button>
+        <Button
+          onClick={handleToggleButton}
+          color="secondary"
+          variant="contained"
+          className="margin"
+        >
+          {renderEditButton()}
+        </Button>
+      </Container>
+
+      {/* </div> */}
+      {renderImages()}
+      {/* </div> */}
     </div>
   );
 };
