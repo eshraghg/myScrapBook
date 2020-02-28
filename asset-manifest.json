@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/MyScrapBook/static/css/main.d700c7ee.chunk.css",
+    "main.js": "/MyScrapBook/static/js/main.037b6607.chunk.js",
+    "main.js.map": "/MyScrapBook/static/js/main.037b6607.chunk.js.map",
+    "runtime-main.js": "/MyScrapBook/static/js/runtime-main.94a3c824.js",
+    "runtime-main.js.map": "/MyScrapBook/static/js/runtime-main.94a3c824.js.map",
+    "static/js/2.1fcc858f.chunk.js": "/MyScrapBook/static/js/2.1fcc858f.chunk.js",
+    "static/js/2.1fcc858f.chunk.js.map": "/MyScrapBook/static/js/2.1fcc858f.chunk.js.map",
+    "index.html": "/MyScrapBook/index.html",
+    "precache-manifest.bb419370499c578a0f175a793a9e9c0e.js": "/MyScrapBook/precache-manifest.bb419370499c578a0f175a793a9e9c0e.js",
+    "service-worker.js": "/MyScrapBook/service-worker.js",
+    "static/css/main.d700c7ee.chunk.css.map": "/MyScrapBook/static/css/main.d700c7ee.chunk.css.map",
+    "static/js/2.1fcc858f.chunk.js.LICENSE.txt": "/MyScrapBook/static/js/2.1fcc858f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.94a3c824.js",
+    "static/js/2.1fcc858f.chunk.js",
+    "static/css/main.d700c7ee.chunk.css",
+    "static/js/main.037b6607.chunk.js"
+  ]
+}
