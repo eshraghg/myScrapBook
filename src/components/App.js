@@ -101,6 +101,7 @@ const App = () => {
     <div>
       {/* <div className="center marginTop"> */}
       {/* <div className="ui input displayInline"> */}
+      <h1>Welcome to Your ScrapBook</h1>
       <Container fluid="true" textAlign="center" className="center marginTop">
         <TextField
           name="linkInput"
